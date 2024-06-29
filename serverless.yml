@@ -1,0 +1,33 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: karlserverless
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: todo-typescript
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: serverless-todo
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+
+plugins:
+  - serverless-offline
+
+package:
+  exclude:
+    - node_modules/**
+    - src/**/*.test.ts
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /hello-ts
+
+  hello-world:
+    handler: src/handlers/hello-world.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /hello-world
