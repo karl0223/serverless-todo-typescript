@@ -9,15 +9,23 @@ provider:
   name: aws
   runtime: nodejs20.x
   environment:
-    DB_NAME: serverless-local
-    DB_USER: postgres
-    DB_PASSWORD: password
-    DB_HOST: localhost
+    DB_NAME: ${self:custom.db.${opt:stage}.DB_NAME}
+    DB_USER: ${self:custom.db.${opt:stage}.DB_USER}
+    DB_PASSWORD: ${self:custom.db.${opt:stage}.DB_PASSWORD}
+    DB_HOST: ${self:custom.db.${opt:stage}.DB_HOST}
 
-    # DB_HOST: database-1.cxckquwok9t2.us-east-1.rds.amazonaws.com
-    # DB_NAME: serverless-postgres
-    # DB_USER: serverlessUser
-    # DB_PASSWORD: serverlessadmin
+custom:
+  db:
+    local:
+      DB_NAME: serverless-local
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_HOST: localhost
+    prod:
+      DB_NAME: serverless-postgres
+      DB_USER: serverlessUser
+      DB_PASSWORD: serverlessadmin
+      DB_HOST: database-1.cxckquwok9t2.us-east-1.rds.amazonaws.com
 
 plugins:
   - serverless-offline
