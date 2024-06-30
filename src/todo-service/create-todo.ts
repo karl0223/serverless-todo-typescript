@@ -13,7 +13,8 @@ export const createTodo: APIGatewayProxyHandler = async(event) => {
             statusCode: 201,
             body: JSON.stringify(todo)
         }
-    } catch {
+    } catch(error) {
+        console.error('Error creating todo:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ message: 'Internal server error' })

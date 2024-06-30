@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "deploy": "serverless deploy",
-    "offline": "npm run build && nodemon -e ts,js,yml,json --exec \"sls offline\"",
+    "offline": "npm run build && nodemon --watch src --ext ts,js,yml,json --exec \"serverless offline\"",
     "start": "serverless offline start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
