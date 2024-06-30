@@ -3,22 +3,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllTodos = void 0;
+exports.createTodo = void 0;
 const todo_1 = __importDefault(require("../models/todo"));
-const getAllTodos = async (event) => {
+const createTodo = async (event) => {
+    const { title, description } = JSON.parse(event.body || '{}');
+    console.log('title:', title);
+    console.log('description:', description);
     try {
-        const todos = await todo_1.default.findAll();
+        const todo = await todo_1.default.create({ title, description });
         return {
             statusCode: 201,
-            body: JSON.stringify(todos)
+            body: JSON.stringify(todo)
         };
     }
-    catch {
+    catch (error) {
+        console.error('Error creating todo:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ message: 'Internal server error' })
         };
     }
 };
-exports.getAllTodos = getAllTodos;
-//# sourceMappingURL=get-all-todos.js.map
+exports.createTodo = createTodo;

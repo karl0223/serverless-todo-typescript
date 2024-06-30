@@ -25,9 +25,11 @@ const Todo = db_1.default.define("Todo", {
         defaultValue: false
     }
 }, {
+    // Use Sequelize's built-in timestamps
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
+    // Ensure the timestamps are in the correct format
     defaultScope: {
         attributes: { exclude: ['createdAt', 'updatedAt'] },
     },
@@ -38,4 +40,3 @@ const Todo = db_1.default.define("Todo", {
     },
 });
 exports.default = Todo;
-//# sourceMappingURL=todo.js.map

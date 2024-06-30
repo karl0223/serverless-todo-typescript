@@ -25,9 +25,14 @@ custom:
       DB_NAME: serverless-postgres
       DB_USER: serverlessUser
       DB_PASSWORD: serverlessadmin
-      DB_HOST: database-1.cxckquwok9t2.us-east-1.rds.amazonaws.com
+      DB_HOST: serverless-postgres.cxckquwok9t2.us-east-1.rds.amazonaws.com
+
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
 
 plugins:
+  - serverless-webpack
   - serverless-offline
 
 package:
@@ -37,35 +42,35 @@ package:
 
 functions:
   test-hello:
-    handler: dist/handlers/test-hello.handler
+    handler: src/handlers/test-hello.handler
     events:
-      - httpApi: "GET /test-hello"
+      - http: "GET /test-hello"
 
   hello:
-    handler: dist/handlers/hello.handler
+    handler: src/handlers/hello.handler
     events:
-      - httpApi:
+      - http:
           method: GET
           path: /hello-ts
 
   hello-world:
-    handler: dist/handlers/hello-world.handler
+    handler: src/handlers/hello-world.handler
     events:
-      - httpApi:
+      - http:
           method: GET
           path: /hello-world
 
   createTodo:
-    handler: dist/todo-service/create-todo.createTodo
+    handler: src/todo-service/create-todo.createTodo
     events:
-      - httpApi:
+      - http:
           method: POST
           path: /create
   
   get-all-todos:
-    handler: dist/todo-service/get-all-todos.getAllTodos
+    handler: src/todo-service/get-all-todos.getAllTodos
     events:
-      - httpApi:
+      - http:
           method: GET
           path: /todos
 

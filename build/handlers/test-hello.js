@@ -11,4 +11,3 @@ const handler = async (event, _context) => {
     };
 };
 exports.handler = handler;
-//# sourceMappingURL=test-hello.js.map
