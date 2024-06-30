@@ -1,30 +1,33 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../db/db";
-const Todo = sequelize.define("Todo", {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
+const db_1 = __importDefault(require("../db/db"));
+const Todo = db_1.default.define("Todo", {
     id: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
     title: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
     description: {
-        type: DataTypes.TEXT,
+        type: sequelize_1.DataTypes.TEXT,
         allowNull: true
     },
     completed: {
-        type: DataTypes.BOOLEAN,
+        type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
     }
 }, {
-    // Use Sequelize's built-in timestamps
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
-    // Ensure the timestamps are in the correct format
     defaultScope: {
         attributes: { exclude: ['createdAt', 'updatedAt'] },
     },
@@ -34,4 +37,5 @@ const Todo = sequelize.define("Todo", {
         },
     },
 });
-export default Todo;
+exports.default = Todo;
+//# sourceMappingURL=todo.js.map

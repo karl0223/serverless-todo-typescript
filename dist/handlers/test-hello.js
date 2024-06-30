@@ -5,10 +5,10 @@ const handler = async (event, _context) => {
     return {
         statusCode: 200,
         body: JSON.stringify({
-            message: 'Hello World from TypeScript!',
+            message: 'Test Hello from TypeScript!',
             input: event,
         }),
     };
 };
 exports.handler = handler;
-//# sourceMappingURL=hello-world.js.map
+//# sourceMappingURL=test-hello.js.map

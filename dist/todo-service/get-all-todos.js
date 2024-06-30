@@ -3,17 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTodo = void 0;
+exports.getAllTodos = void 0;
 const todo_1 = __importDefault(require("../models/todo"));
-const createTodo = async (event) => {
-    const { title, description } = JSON.parse(event.body || '{}');
-    console.log('title:', title);
-    console.log('description:', description);
+const getAllTodos = async (event) => {
     try {
-        const todo = await todo_1.default.create({ title, description });
+        const todos = await todo_1.default.findAll();
         return {
             statusCode: 201,
-            body: JSON.stringify(todo)
+            body: JSON.stringify(todos)
         };
     }
     catch {
@@ -23,5 +20,5 @@ const createTodo = async (event) => {
         };
     }
 };
-exports.createTodo = createTodo;
-//# sourceMappingURL=create-todo.js.map
+exports.getAllTodos = getAllTodos;
+//# sourceMappingURL=get-all-todos.js.map

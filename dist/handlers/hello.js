@@ -1,4 +1,7 @@
-export const handler = async (event, _context) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handler = void 0;
+const handler = async (event, _context) => {
     return {
         statusCode: 200,
         body: JSON.stringify({
@@ -7,3 +10,5 @@ export const handler = async (event, _context) => {
         }),
     };
 };
+exports.handler = handler;
+//# sourceMappingURL=hello.js.map

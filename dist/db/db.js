@@ -1,27 +1,9 @@
-import { Sequelize } from 'sequelize';
-import * as config from '../config/config.json';
-const env = process.env.NODE_ENV || 'development';
-const sequelize = new Sequelize(config[env]);
-// Test the connection
-async function testConnection() {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection to the database has been established successfully.');
-    }
-    catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-}
-// Synchronize all defined models to the DB
-async function syncModels() {
-    try {
-        await sequelize.sync({ alter: true }); // Use alter: true for development to automatically update schema
-        console.log('All models were synchronized successfully.');
-    }
-    catch (error) {
-        console.error('Unable to synchronize models:', error);
-    }
-}
-testConnection();
-syncModels();
-export default sequelize;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
+const sequelize = new sequelize_1.Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: "postgres",
+});
+exports.default = sequelize;
+//# sourceMappingURL=db.js.map

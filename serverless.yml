@@ -8,6 +8,16 @@ service: serverless-todo
 provider:
   name: aws
   runtime: nodejs20.x
+  environment:
+    DB_NAME: serverless-local
+    DB_USER: postgres
+    DB_PASSWORD: password
+    DB_HOST: localhost
+
+    # DB_HOST: database-1.cxckquwok9t2.us-east-1.rds.amazonaws.com
+    # DB_NAME: serverless-postgres
+    # DB_USER: serverlessUser
+    # DB_PASSWORD: serverlessadmin
 
 plugins:
   - serverless-offline
@@ -18,23 +28,36 @@ package:
     - src/**/*.test.ts
 
 functions:
+  test-hello:
+    handler: dist/handlers/test-hello.handler
+    events:
+      - httpApi: "GET /test-hello"
+
   hello:
-    handler: src/handlers/hello.handler
+    handler: dist/handlers/hello.handler
     events:
       - httpApi:
           method: GET
           path: /hello-ts
 
   hello-world:
-    handler: src/handlers/hello-world.handler
+    handler: dist/handlers/hello-world.handler
     events:
       - httpApi:
           method: GET
           path: /hello-world
 
-  create-todo:
-    handler: src/todo-service/create-todo.createTodo
+  createTodo:
+    handler: dist/todo-service/create-todo.createTodo
     events:
       - httpApi:
           method: POST
           path: /create
+  
+  get-all-todos:
+    handler: dist/todo-service/get-all-todos.getAllTodos
+    events:
+      - httpApi:
+          method: GET
+          path: /todos
+
