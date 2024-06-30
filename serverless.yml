@@ -31,3 +31,10 @@ functions:
       - httpApi:
           method: GET
           path: /hello-world
+
+  create-todo:
+    handler: src/todo-service/create-todo.createTodo
+    events:
+      - httpApi:
+          method: POST
+          path: /create
